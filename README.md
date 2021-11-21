@@ -106,6 +106,3 @@
 ```
 
 	Chương trình phía user_space
-
-sudo rpm -i m4-1.4.16-10.el7.x86_64.rpm
-sudo rpm -i bison-3.0.4-2.el7.x86_64.rpm

@@ -1,9 +1,9 @@
-import time
 import os
 import zlib
 import logging
 import logging.handlers
 from logging import Formatter
+
 
 # name the compressed file
 def namer(name):

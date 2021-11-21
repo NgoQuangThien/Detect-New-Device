@@ -26,7 +26,7 @@
 })
 
 /* to u64 in host order */
-static inline __u64 mac_addr_to_u64(const __u8 *addr)
+static inline __u64 mac_to_u64(const __u8 *addr)
 {
 	__u64 u = 0;
 	int i;
@@ -36,9 +36,9 @@ static inline __u64 mac_addr_to_u64(const __u8 *addr)
 	return u;
 }
 
-static inline __u64 ip_addr_to_64(const __u8 *addr)
+static inline __u32 ip_to_u32(const __u8 *addr)
 {
-	__u64 u = 0;
+	__u32 u = 0;
 	int i;
 
 	for (i = 4 - 1; i >= 0; i--)
@@ -70,8 +70,8 @@ int  xdp_prog_simple(struct xdp_md *ctx)
 		{
 			// Print ARP Reply info
 			bpf_printk("mac:%llu, ip:%llu\n",
-					mac_addr_to_u64(arphdr->ar_sha),
-					ip_addr_to_64(arphdr->ar_sip)
+					mac_to_u64(arphdr->ar_sha),
+					ip_to_u32(arphdr->ar_sip)
 					);
 		}
 	}

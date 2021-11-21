@@ -17,6 +17,5 @@
   Kiểm tra chương trình
 
 ```
-  $ sudo su
-  # cat /sys/kernel/debug/tracing/trace_pipe
+  # sudo cat /sys/kernel/debug/tracing/trace_pipe
 ```

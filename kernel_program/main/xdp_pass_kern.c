@@ -69,7 +69,7 @@ int  xdp_prog_simple(struct xdp_md *ctx)
 		if (arp_type == bpf_htons(ARPOP_REPLY))
 		{
 			// Print ARP Reply info
-			bpf_printk("mac: %llu, ip: %llu\n",
+			bpf_printk("mac:%llu, ip:%llu\n",
 					mac_addr_to_u64(arphdr->ar_sha),
 					ip_addr_to_64(arphdr->ar_sip)
 					);

@@ -84,6 +84,7 @@ if __name__ == "__main__":
     countdown_thread.setDaemon(True)
     countdown_thread.start()
 
+    # Thread for reload white_list
     reload_white_list_thread = threading.Thread(name='white_list_reload', target=white_list_reload)
     reload_white_list_thread.setDaemon(True)
     reload_white_list_thread.start()

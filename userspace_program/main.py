@@ -9,7 +9,7 @@ from lib import converter
 from lib import db_processor
 
 
-ignore_interval = 5 # 1 hour
+ignore_interval = 3600 # 1 hour
 ignore_list = {}
 white_list = []
 log_path = "/home/soc/Detect-New-Device/userspace_program/log/"
@@ -31,7 +31,7 @@ message_template = """{
 
 def get_device_list(connection):
     temp = db_processor.select_white_list(connection)
-    white_list = [device.get('mac') for device in temp]
+    white_list = [device.get('mac').lower() for device in temp]
     return white_list
 
 def message_processor(current_time, mac_addr, ip_addr):
@@ -69,9 +69,14 @@ def logging_to_mysql(mac, ip):
     db_processor.insert_new_device(connection ,mac, ip)
 
 if __name__ == "__main__":
+    # Create database if not exists
+    db_processor.create_database()
+
+    # Get white_list
     connection = db_processor.connect_to_db()
     white_list = get_device_list(connection)
 
+    # Start worker logging to file
     alert_logging.create_time_based_rotating_log(log_path)
 
     # Thread for remove the device from ignore_list when the time period ends

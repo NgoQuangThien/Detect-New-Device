@@ -2,7 +2,7 @@
 
 ## Setup
 
-  Cấp quyền thực thi cho scripts
+### Cấp quyền thực thi cho scripts
 
 ```
   $ chmod +x libbpf/scripts/check-reallocarray.sh

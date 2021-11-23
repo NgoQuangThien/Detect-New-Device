@@ -114,10 +114,10 @@ if __name__ == "__main__":
                     ip_addr = converter.u32_to_ip(int(ip_addr))
 
                     now = datetime.now()
-                    current_time = now.strftime("%Y-%m-%d %H:%M:%S")
+                    current_time = now.isoformat()
 
                     # Logging event to file
-                    message = message_processor(current_time, mac_addr, ip_addr)
+                    message = json.dumps(message_processor(current_time, mac_addr, ip_addr))
                     logger = alert_logging.logging.getLogger("Rotating Log")
                     logger.propagate = False
                     logger.critical(message)

@@ -2,7 +2,7 @@ import pymysql.cursors
 
 
 manager_ip = "10.10.10.3"
-mysql_user = "root"
+mysql_user = "bids_dnd"
 mysql_password = "xv7AUpuZmZ5jW8z0lJz5"
 db_name = "bids_dnd"
 

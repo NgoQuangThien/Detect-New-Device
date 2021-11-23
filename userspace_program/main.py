@@ -24,7 +24,7 @@ message_template = """{
                         },
                         "event": {
                             "dataset": "alert",
-                            "event.severity_label": "critical",
+                            "severity_label": "critical",
                             "module": "bids"
                         }
                     }"""

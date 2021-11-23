@@ -52,7 +52,7 @@
 ```
 	$ cd kernel_program/main/
 	$ make
-	$ sudo ./xdp_loader --dev ens192 --auto-mode --force
+	$ sudo ./xdp_loader --dev <interface_name> --auto-mode --force
 ```
 
 ####	Chương trình phía userspace

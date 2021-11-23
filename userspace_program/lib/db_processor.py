@@ -1,5 +1,4 @@
 import pymysql.cursors
-import time
 
 
 manager_ip = "10.10.10.3"

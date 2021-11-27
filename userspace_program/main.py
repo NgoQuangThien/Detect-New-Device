@@ -12,7 +12,7 @@ from lib import db_processor
 ignore_interval = 3600 # 1 hour
 ignore_list = {}
 white_list = []
-log_path = "/home/soc/Detect-New-Device/userspace_program/log/"
+log_path = "/nsm/raw_log/bids/dnd/"
 message_template = """{
                         "@timestamp": "*",
                         "rule": {
@@ -66,7 +66,12 @@ def white_list_reload():
 
 def logging_to_mysql(mac, ip):
     connection = db_processor.connect_to_db()
-    db_processor.insert_new_device(connection ,mac, ip)
+    row_count = db_processor.count_mac_in_new_device(connection, mac)
+
+    # MAC not exists in new_device
+    if not row_count.get('COUNT(mac)'): 
+        connection = db_processor.connect_to_db()
+        db_processor.insert_new_device(connection ,mac, ip)
 
 if __name__ == "__main__":
     # Create database if not exists
@@ -106,10 +111,8 @@ if __name__ == "__main__":
                 if mac_addr not in white_list and mac_addr not in ignore_list:
                     # get IP integer format
                     ip_addr = regex_host_info.get_ip_addr(line)
-
                     # Split regex string
                     ip_addr = ip_addr[3:len(ip_addr)]
-
                     # Convert address
                     ip_addr = converter.u32_to_ip(int(ip_addr))
 
@@ -122,12 +125,16 @@ if __name__ == "__main__":
                     logger.propagate = False
                     logger.critical(message)
 
-                    # Logging event to MySQL
-                    logging_to_mysql(mac_addr, ip_addr)
+                    # Thread for logging to MySQL
+                    logging2mysql_thread = threading.Thread(name='logging_to_mysql', target=logging_to_mysql, args=(mac_addr, ip_addr,))
+                    logging2mysql_thread.setDaemon(True)
+                    logging2mysql_thread.start()
 
                     # Add device to ignore_list
                     ignore_list[mac_addr] = now.timestamp()
 
-                    # Keep alive countdown_thread
+                    # Keep alive countdown_thread and reload_white_list_thread
                     if not countdown_thread.isAlive: countdown_thread.start()
                     if not reload_white_list_thread.isAlive: reload_white_list_thread.start()
+
+                    # print(threading.active_count())

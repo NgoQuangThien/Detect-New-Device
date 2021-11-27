@@ -1,7 +1,7 @@
 import pymysql.cursors
 
 
-manager_ip = "10.10.10.3"
+manager_ip = "10.2.65.163"
 mysql_user = "bids_dnd"
 mysql_password = "xv7AUpuZmZ5jW8z0lJz5"
 db_name = "bids_dnd"
@@ -41,10 +41,18 @@ def connect_to_db():
 def select_white_list(connection):
     with connection:
         with connection.cursor() as select_cursor:
-            # Read a single record
+            # Read all record
             sql = "SELECT mac FROM device"
             select_cursor.execute(sql)
             result = select_cursor.fetchall()
+            return result
+
+def count_mac_in_new_device(connection, mac):
+    with connection:
+        with connection.cursor() as select_cursor:
+            sql = "SELECT COUNT(mac) FROM new_device WHERE mac = %s"
+            select_cursor.execute(sql, (mac))
+            result = select_cursor.fetchone()
             return result
 
 def insert_new_device(connection, mac, ip):

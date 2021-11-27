@@ -48,21 +48,21 @@
 
 ###	Chạy chương trình
 
-####	Chương trình phía kernel
+####	Chương trình phía kernel (cần phải gán chương trình vào tất cả interface vật lý của thiết bị)
 ```
 	$ cd kernel_program/main/
 	$ make
-	$ sudo ./xdp_loader --dev <interface_name> --auto-mode --force
+	$ sudo ./xdp_pass_user --dev <interface_name> --auto-mode --force
 ```
 
 ####	Chương trình phía userspace
 ```
 	$ cd userspace_program/
-	$ sudo python3 main.py
+	$ sudo python3 main.py (chạy thử chương trình)
 ```
 
 ###	Chạy userspace program dưới dạng service
-```shell
+```
 	$ cd userspace_program/install_service/
 	$ sudo bash create_service.sh
 ```

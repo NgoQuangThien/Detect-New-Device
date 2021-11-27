@@ -11,4 +11,5 @@ cp -rf bids-dnd.service /etc/systemd/system/
 
 sudo systemctl daemon-reload
 sudo systemctl restart bids-dnd.service
+sudo systemctl enable bids-dnd.service
 sudo systemctl status bids-dnd.service

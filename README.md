@@ -62,7 +62,7 @@
 ```
 
 ###	Chạy userspace program dưới dạng service
-```
+```shell
 	$ cd userspace_program/install_service/
 	$ sudo bash create_service.sh
 ```

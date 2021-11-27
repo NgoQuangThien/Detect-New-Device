@@ -42,7 +42,9 @@ sudo cp xdp/stubs-32.h /usr/include/gnu/
 sudo rpm -i kernel/kernel-ml-5.15.3-1.el7.elrepo.x86_64.rpm
 
 #
-sudo bash ../kernel_program/chmod_x.sh
+cd ../kernel_program/
+sudo bash chmod_x.sh
 
 #
-sudo bash ../userspace_program/install.sh
+cd ../userspace_program/
+sudo bash install.sh
